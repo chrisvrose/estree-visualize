@@ -1,35 +1,29 @@
 <script lang="ts">
-	import { parseJSModule } from '$lib/parse';
-	
+	import { getASTStringFromSource } from '$lib/parse';
+
 	let sourceString = $state('');
 	// $inspect(s);
-	const [derivedASTString,derivedAST,error] = $derived.by(() => {
-		return getASTStringFromSource();
-
-		function getASTStringFromSource() {
-			let finalRes: string = '';
-			let finalAST = null;
-			let error;
-			try {
-				const x = parseJSModule(sourceString);
-				finalRes = JSON.stringify(x, undefined, 1);
-				error = null;
-			} catch (e) {
-				error = String(e);
-				finalRes = '';
-			}
-			return [finalRes,finalAST,error];
-		}
-	});
+	const [derivedASTString, derivedAST, error] = $derived(getASTStringFromSource(sourceString));
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
 
-<textarea placeholder="Enter a javascript module" bind:value={sourceString}> </textarea>
 
-<textarea readonly value={derivedAST}></textarea>
+<h1 class="h1">Welcome to Pain</h1>
 
-{#if error!==null}
-	<div>{error}</div>
-{/if}
+<div class="grid grid-cols-1 md:grid-cols-2 ">
+	<div style="grid-column: 1">
+		<textarea class="w-100" placeholder="Enter a javascript module" bind:value={sourceString}> </textarea>
+	</div>
+	<div class="grid grid-cols-1" style="grid-column: 2">
+		<div>
+			<textarea class="w-100" readonly value={derivedASTString}></textarea>
+		</div>
+		<div>
+			{#if error !== null}
+				<div>{error}</div>
+			{/if}
+		</div>
+	</div>
+</div>
+
+

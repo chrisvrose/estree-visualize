@@ -1,0 +1,4 @@
+@import 'tailwindcss';
+@import '@skeletonlabs/skeleton/themes/nosh';
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
