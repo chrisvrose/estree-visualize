@@ -1,24 +1,35 @@
 <script lang="ts">
 	import { parseJSModule } from '$lib/parse';
-
-	let s = $state('');
-	// $inspect(s);
-	const derivedAST = $derived.by(() => {
-		let finalRes: string = '';
-		try {
-			const x = parseJSModule(s);
-            finalRes = JSON.stringify(x,undefined,1);
-		} catch (e){
-            finalRes = String(e);
-        }
-        return finalRes;
-	});
 	
+	let sourceString = $state('');
+	// $inspect(s);
+	const [derivedASTString,derivedAST,error] = $derived.by(() => {
+		return getASTStringFromSource();
+
+		function getASTStringFromSource() {
+			let finalRes: string = '';
+			let finalAST = null;
+			let error;
+			try {
+				const x = parseJSModule(sourceString);
+				finalRes = JSON.stringify(x, undefined, 1);
+				error = null;
+			} catch (e) {
+				error = String(e);
+				finalRes = '';
+			}
+			return [finalRes,finalAST,error];
+		}
+	});
 </script>
 
 <h1>Welcome to SvelteKit</h1>
 <p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
 
-<textarea placeholder="Enter a javascript module" bind:value={s}> </textarea>
+<textarea placeholder="Enter a javascript module" bind:value={sourceString}> </textarea>
 
 <textarea readonly value={derivedAST}></textarea>
+
+{#if error!==null}
+	<div>{error}</div>
+{/if}
