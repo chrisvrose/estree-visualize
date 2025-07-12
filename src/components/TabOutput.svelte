@@ -1,0 +1,36 @@
+<script lang="ts">
+	import type { Program } from "estree";
+	import ErrorBox from "./ErrorBox.svelte";
+    import {Tabs} from '@skeletonlabs/skeleton-svelte'
+    import CodeMirror from "svelte-codemirror-editor";
+	import { isAnyError } from "$lib/parse";
+    type TabOutputProps = {
+        sourceAST: Program | null,
+        sourceASTString: string | null,
+        error: string | null
+    }
+    type CurrentTab = 'error'|'ast'|'astString' | string;
+
+    const {sourceAST,sourceASTString,error}:TabOutputProps = $props();
+    let selectedTab:CurrentTab = $state('astString');
+
+
+</script>
+
+<Tabs value={selectedTab} onValueChange={e=>selectedTab = e.value}>
+    {#snippet list()}
+        <Tabs.Control value="ast">Graphical AST</Tabs.Control>
+        <Tabs.Control value="astString">Textual AST</Tabs.Control>
+        <Tabs.Control value="error">Errors {#if isAnyError(error)}
+              <span class="badge-icon preset-filled-primary-500 absolute -right-0 -top-0 z-10">!</span>
+        {/if}</Tabs.Control>
+    {/snippet}
+    {#snippet content()}
+        <Tabs.Panel value="astString">
+            <CodeMirror value={sourceASTString} readonly></CodeMirror>
+        </Tabs.Panel>
+        <Tabs.Panel value="error">
+            <ErrorBox error={error}/>
+        </Tabs.Panel>
+    {/snippet}
+</Tabs>
