@@ -18,8 +18,7 @@
 
 <div class="grid grid-cols-1 md:grid-cols-2 min-h-screen">
 	<div style="grid-column: 1 " class="p-1" >
-		<CodeMirror class="border-1" bind:value={sourceString} lang={javascript()} placeholder="Javascript code"></CodeMirror>
-		<!-- <textarea class="w-full box-border" placeholder="Enter a javascript module" bind:value={sourceString}> </textarea> -->
+		<CodeMirror class="border-1" bind:value={sourceString} lang={javascript()} placeholder="Javascript code" basic={true} ></CodeMirror>
 	</div>
 	<div class="grid grid-cols-1 p-1" style="grid-column: 2" >
 		<TabOutput error={error} sourceAST={derivedAST} sourceASTString={derivedASTString} />

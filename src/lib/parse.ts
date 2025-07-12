@@ -11,12 +11,12 @@ function parseJSModuleLight(x:string){
 export function getASTStringFromSource(sourceString: string) {
 	let finalASTString: string = '';
 	let finalAST = null;
-	let error;
+	let error = null;
+
 	try {
 		const ast = parseJSModuleDeep(sourceString);
 		finalAST = ast;
 		finalASTString = JSON.stringify(parseJSModuleLight(sourceString), undefined, 1);
-		error = null;
 	} catch (e) {
 		error = String(e);
 		finalASTString = '';

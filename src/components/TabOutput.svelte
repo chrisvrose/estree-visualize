@@ -4,6 +4,7 @@
     import {Tabs} from '@skeletonlabs/skeleton-svelte'
     import CodeMirror from "svelte-codemirror-editor";
 	import { isAnyError } from "$lib/parse";
+	import AstDisplay from "./ASTDisplay.svelte";
     type TabOutputProps = {
         sourceAST: Program | null,
         sourceASTString: string | null,
@@ -27,7 +28,10 @@
     {/snippet}
     {#snippet content()}
         <Tabs.Panel value="astString">
-            <CodeMirror value={sourceASTString} readonly></CodeMirror>
+            <CodeMirror value={sourceASTString} basic={true} readonly></CodeMirror>
+        </Tabs.Panel>
+        <Tabs.Panel value="ast">
+            <AstDisplay ast={sourceAST} />
         </Tabs.Panel>
         <Tabs.Panel value="error">
             <ErrorBox error={error}/>
