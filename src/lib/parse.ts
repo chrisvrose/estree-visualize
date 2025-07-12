@@ -1,7 +1,10 @@
 import { parseModule } from 'esprima'
 
 
-function parseJSModule(x: string) {
+function parseJSModuleDeep(x: string) {
+	return parseModule(x, { loc: true , comment: true, tolerant: true,range: true});
+}
+function parseJSModuleLight(x:string){
 	return parseModule(x);
 }
 
@@ -10,9 +13,9 @@ export function getASTStringFromSource(sourceString: string) {
 	let finalAST = null;
 	let error;
 	try {
-		const ast = parseJSModule(sourceString);
+		const ast = parseJSModuleDeep(sourceString);
 		finalAST = ast;
-		finalASTString = JSON.stringify(ast, undefined, 1);
+		finalASTString = JSON.stringify(parseJSModuleLight(sourceString), undefined, 1);
 		error = null;
 	} catch (e) {
 		error = String(e);
@@ -21,6 +24,6 @@ export function getASTStringFromSource(sourceString: string) {
 	return [finalASTString, finalAST, error] as const;
 }
 
-export function isAnyError(errorString: string|null){
+export function isAnyError(errorString: string | null) {
 	return !!errorString;
 }
