@@ -1,18 +1,15 @@
-# sv
+# estree-visualize
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+View a ECMAScript module AST.
 
-## Creating a project
+### Progress 
 
-If you're seeing this, you've probably already done this step. Congrats!
+- [X] View AST text
+- [X] View Errors
+- [ ] Highlight AST from code
+- [ ] Graph viewing
+- [ ] Highlight Graph from code
 
-```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
-```
 
 ## Developing
 
