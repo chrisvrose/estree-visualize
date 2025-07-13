@@ -7,7 +7,10 @@
         Panel,
 		useSvelteFlow,
 		type Edge,
-		type Node
+		type Node,
+
+		MiniMap
+
 	} from '@xyflow/svelte';
 	import Dagre from '@dagrejs/dagre';
 	import '@xyflow/svelte/dist/style.css';
@@ -74,6 +77,7 @@
 				<button onclick={onLayout} type="button" class="btn">Refit</button>
 			</nav>
 		</Panel>
-		<Background ></Background>
+		<MiniMap nodeStrokeWidth={3} />
+		<Background></Background>
 	</SvelteFlow>
 </div>
