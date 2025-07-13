@@ -14,7 +14,7 @@
     type CurrentTab = 'error'|'ast'|'astString' | string;
 
     const {sourceAST,sourceASTString,error}:TabOutputProps = $props();
-    let selectedTab:CurrentTab = $state('astString');
+    let selectedTab:CurrentTab = $state('ast');
 
 
 </script>
