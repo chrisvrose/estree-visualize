@@ -2,12 +2,13 @@
 
 View a ECMAScript module AST.
 
+
 ### Progress 
 
 - [X] View AST text
 - [X] View Errors
 - [ ] Highlight AST from code
-- [ ] Graph viewing
+- [X] Graph viewing
 - [ ] Highlight Graph from code
 
 

@@ -1,28 +1,81 @@
 <script lang="ts">
-	import type { Program } from "estree";
-	import { TreeNode } from "$lib/d3adapter";
-    type ASTDisplayProps = {
-        ast: Program|null
-    };
-    let {ast}:ASTDisplayProps = $props();
-    let d3svg:SVGElement;
+	import type { Program } from 'estree';
+	import { createSvelteFlowGraph } from '$lib/svelteflowadapter';
+	import {
+		Background,
+		SvelteFlow,
+        Panel,
+		SvelteFlowProvider,
+		useSvelteFlow,
+		type Edge,
+		type Node
+	} from '@xyflow/svelte';
+	import Dagre from '@dagrejs/dagre';
+	import '@xyflow/svelte/dist/style.css';
 
-    // $inspect(ast);
-    const [x,y,z] = $derived(TreeNode.create(ast));
-    $inspect(x,y,z);
+	type ASTDisplayProps = {
+		ast: Program | null;
+	};
 
-    import '@xyflow/svelte/dist/style.css';
-	import { Background, SvelteFlow } from "@xyflow/svelte";
+	let { ast }: ASTDisplayProps = $props();
 
+	const { fitView } = useSvelteFlow();
+
+	let [nodes, edges] = $derived(getLayoutedElements(...createSvelteFlowGraph(ast)));
+
+	function getLayoutedElements(nodes: Node[], edges: Edge[]): [Node[], Edge[]] {
+		if (nodes.length === 0) {
+			return [nodes, edges];
+		}
+
+		const g = new Dagre.graphlib.Graph().setDefaultEdgeLabel(() => ({}));
+
+		g.setGraph({});
+
+		edges.forEach((edge) => g.setEdge(edge.source, edge.target));
+		nodes.forEach((node) =>
+			g.setNode(node.id, {
+				...node,
+				width: node.width ?? 150,
+				height: node.height ?? 75
+			})
+		);
+
+		Dagre.layout(g);
+		return [
+			nodes.map((node) => {
+				const position = g.node(node.id);
+				// We are shifting the dagre node position (anchor=center center) to the top left
+				// so it matches the Svelte Flow node anchor point (top left).
+				const x = position.x - (node.measured?.width ?? 0) / 2;
+				const y = position.y - (node.measured?.height ?? 0) / 2;
+
+				return {
+					...node,
+					position: { x, y }
+					// sourcePosition:  'bottom',
+					// targetPosition:  'top',
+				};
+			}),
+			edges
+		];
+	}
+	function onLayout() {
+		const [newNodes, newEdges] = getLayoutedElements(nodes, edges);
+		nodes = [...newNodes];
+		edges = [...newEdges];
+		fitView();
+	}
 </script>
 
-
 <span>AST</span>
-<p></p>
-<p>{JSON.stringify(y)}</p>
-<div style:width="40vw" style:height="40vh">
-
-    <SvelteFlow aria-readonly={true} nodes={y} edges={z}>
-        <Background></Background>
-    </SvelteFlow>
+<div style:height="80vh" id="something">
+	<SvelteFlow aria-readonly={true} bind:nodes bind:edges colorMode="system" >
+		<Panel position="top-right">
+			<nav class="btn-group preset-outlined-surface-200-800 flex-col p-2 md:flex-row">
+				<button onclick={onLayout} type="button" class="btn">Refit</button>
+			</nav>
+		</Panel>
+		<Background ></Background>
+	</SvelteFlow>
 </div>

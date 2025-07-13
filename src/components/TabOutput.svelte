@@ -5,6 +5,7 @@
     import CodeMirror from "svelte-codemirror-editor";
 	import { isAnyError } from "$lib/parse";
 	import AstDisplay from "./ASTDisplay.svelte";
+	import { SvelteFlowProvider } from "@xyflow/svelte";
     type TabOutputProps = {
         sourceAST: Program | null,
         sourceASTString: string | null,
@@ -31,7 +32,9 @@
             <CodeMirror value={sourceASTString} basic={true} readonly></CodeMirror>
         </Tabs.Panel>
         <Tabs.Panel value="ast">
+        <SvelteFlowProvider>
             <AstDisplay ast={sourceAST} />
+        </SvelteFlowProvider>
         </Tabs.Panel>
         <Tabs.Panel value="error">
             <ErrorBox error={error}/>
