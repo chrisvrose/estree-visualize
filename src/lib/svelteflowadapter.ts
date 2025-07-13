@@ -34,7 +34,7 @@ export function createSvelteFlowGraph(program: Program | null): [SvelteFlowNode[
 
                 svEdges.push(
                     {
-                        id: (edgeNum++).toString(),
+                        id: (edgeNum++).toString() + parentNodeLabel,
                         target: nodeId,
                         source: parentNodeLabel
                     });
