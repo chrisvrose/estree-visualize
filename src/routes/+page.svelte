@@ -1,13 +1,11 @@
 <script lang="ts">
 	import { getASTStringFromSource } from '$lib/parse';
 	import CodeMirror from 'svelte-codemirror-editor';
-	import ErrorBox from '../components/ErrorBox.svelte';
 	import {javascript} from '@codemirror/lang-javascript'
-	import TabOutput from '../components/TabOutput.svelte';
+	import OutputTab from '../components/OutputTab.svelte';
 
 	let sourceString = $state('');
 
-	// $inspect(s);
 	const [derivedASTString, derivedAST, error] = $derived(getASTStringFromSource(sourceString));
 </script>
 
@@ -21,7 +19,7 @@
 		<CodeMirror class="border-1" bind:value={sourceString} lang={javascript()} placeholder="Javascript code" basic={true} ></CodeMirror>
 	</div>
 	<div class="grid grid-cols-1 p-1" style="grid-column: 2" >
-		<TabOutput error={error} sourceAST={derivedAST} sourceASTString={derivedASTString} />
+		<OutputTab error={error} sourceAST={derivedAST} sourceASTString={derivedASTString} />
 	</div>
 </div>
 

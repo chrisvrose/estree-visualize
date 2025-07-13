@@ -1,5 +1,7 @@
 
 <script lang="ts">
+	import { isAnyError } from "$lib/parse";
+
     type ErrorBoxProps = {
         error:string|null
     };
@@ -8,7 +10,7 @@
 </script>
 
 <div>
-    {#if error!==null}
+    {#if isAnyError(error)}
         <div>{error}</div>
     {/if}
 </div>

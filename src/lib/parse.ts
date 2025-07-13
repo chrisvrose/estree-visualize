@@ -2,7 +2,7 @@ import { parseModule } from 'esprima'
 
 
 function parseJSModuleDeep(x: string) {
-	return parseModule(x, { loc: true , comment: true, tolerant: true,range: true});
+	return parseModule(x, { loc: true , comment: true});
 }
 function parseJSModuleLight(x:string){
 	return parseModule(x);

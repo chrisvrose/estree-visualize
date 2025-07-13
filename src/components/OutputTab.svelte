@@ -6,17 +6,18 @@
 	import { isAnyError } from "$lib/parse";
 	import AstDisplay from "./ASTDisplay.svelte";
 	import { SvelteFlowProvider } from "@xyflow/svelte";
-    type TabOutputProps = {
+    
+    type CurrentTab = 'error'|'ast'|'astString' | string;
+    
+    type OutputTabProps = {
         sourceAST: Program | null,
         sourceASTString: string | null,
         error: string | null
     }
-    type CurrentTab = 'error'|'ast'|'astString' | string;
 
-    const {sourceAST,sourceASTString,error}:TabOutputProps = $props();
+    const {sourceAST,sourceASTString,error}:OutputTabProps = $props();
+    
     let selectedTab:CurrentTab = $state('ast');
-
-
 </script>
 
 <Tabs value={selectedTab} onValueChange={e=>selectedTab = e.value}>

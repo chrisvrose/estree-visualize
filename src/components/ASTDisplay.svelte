@@ -5,7 +5,6 @@
 		Background,
 		SvelteFlow,
         Panel,
-		SvelteFlowProvider,
 		useSvelteFlow,
 		type Edge,
 		type Node
@@ -68,9 +67,8 @@
 	}
 </script>
 
-<span>AST</span>
 <div style:height="80vh" id="something">
-	<SvelteFlow aria-readonly={true} bind:nodes bind:edges colorMode="system" >
+	<SvelteFlow aria-readonly={true} bind:nodes bind:edges colorMode="system" fitView >
 		<Panel position="top-right">
 			<nav class="btn-group preset-outlined-surface-200-800 flex-col p-2 md:flex-row">
 				<button onclick={onLayout} type="button" class="btn">Refit</button>
