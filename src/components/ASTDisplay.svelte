@@ -4,13 +4,11 @@
 	import {
 		Background,
 		SvelteFlow,
-        Panel,
+		Panel,
 		useSvelteFlow,
 		type Edge,
 		type Node,
-
 		MiniMap
-
 	} from '@xyflow/svelte';
 	import Dagre from '@dagrejs/dagre';
 	import '@xyflow/svelte/dist/style.css';
@@ -71,7 +69,7 @@
 </script>
 
 <div style:height="80vh" id="something">
-	<SvelteFlow aria-readonly={true} bind:nodes bind:edges colorMode="system" fitView >
+	<SvelteFlow aria-readonly={true} bind:nodes bind:edges colorMode="system" fitView>
 		<Panel position="top-right">
 			<nav class="btn-group preset-outlined-surface-200-800 flex-col p-2 md:flex-row">
 				<button onclick={onLayout} type="button" class="btn">Refit</button>
