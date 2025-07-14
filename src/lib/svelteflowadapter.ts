@@ -54,6 +54,12 @@ function getNewSvelteFlowNode(nodeId: string, node: Node): SvelteFlowNode {
         case 'Identifier':
             newNode.data.label += ` (${node.name})`;
             break;
+        case 'FunctionExpression':
+            break;
+        case 'BinaryExpression':
+            newNode.data.label += ` (${node.operator})`;
+            break;
+        
 
     }
     return newNode;
