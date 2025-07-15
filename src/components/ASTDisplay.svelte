@@ -13,6 +13,9 @@
 	import Dagre from '@dagrejs/dagre';
 	import '@xyflow/svelte/dist/style.css';
 
+	import {type Node as ESNode} from 'estree';
+	import { userSelectionStore} from '$lib/state/selection.svelte';
+
 	type ASTDisplayProps = {
 		ast: Program | null;
 	};
@@ -23,6 +26,7 @@
 
 	let [nodes, edges] = $derived(getLayoutedElements(...createSvelteFlowGraph(ast)));
 
+	$inspect($userSelectionStore);
 	function getLayoutedElements(nodes: Node[], edges: Edge[]): [Node[], Edge[]] {
 		if (nodes.length === 0) {
 			return [nodes, edges];
@@ -53,8 +57,6 @@
 				return {
 					...node,
 					position: { x, y }
-					// sourcePosition:  'bottom',
-					// targetPosition:  'top',
 				};
 			}),
 			edges
@@ -69,7 +71,9 @@
 </script>
 
 <div style:height="80vh" id="something">
-	<SvelteFlow aria-readonly={true} bind:nodes bind:edges colorMode="system" fitView>
+	<SvelteFlow aria-readonly={true} bind:nodes bind:edges colorMode="system" fitView onnodepointerenter={(nodeEvent)=>{
+		$userSelectionStore = nodeEvent.node.data.range as any as ESNode['range'];
+	}} onnodepointerleave={()=>{$userSelectionStore = undefined}}>
 		<Panel position="top-right">
 			<nav class="btn-group preset-outlined-surface-200-800 flex-col p-2 md:flex-row">
 				<button onclick={onLayout} type="button" class="btn">Refit</button>

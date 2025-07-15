@@ -5,7 +5,7 @@ import type { Node, Program } from 'estree';
 type NodeData = {
     node: Node,
     label: string,
-    loc: Node['loc'],
+    range: Node['range'],
     parentNodeLabel: string | null
 }
 
@@ -29,9 +29,7 @@ export function createSvelteFlowGraph(program: Program | null): [SvelteFlowNode[
                 }
                 const usingEdgeNum = edgeNum++;
                 const newEdge = getEdgeBasedOnNodeAndParent(usingEdgeNum, parentNodeLabel, nodeId, node, parentNode);
-                svEdges.push(
-                    newEdge);
-                // FIXME - this sets the data in the array as well
+                svEdges.push(newEdge);
                 newNode.data.parentNodeLabel = parentNodeLabel;
             }
         }
@@ -40,14 +38,15 @@ export function createSvelteFlowGraph(program: Program | null): [SvelteFlowNode[
     return [svNodes, svEdges] as const;
 }
 function getNewSvelteFlowNode(nodeId: string, node: Node): SvelteFlowNode {
-    const nodeData: NodeData = { node, label: node.type, loc: node.loc, parentNodeLabel: null }
+    const nodeData: NodeData = { node, label: node.type, range: node.range, parentNodeLabel: null }
 
-    const newNode = {
+    const newNode: SvelteFlowNode = {
         data: nodeData,
         id: nodeId,
-        position: { x: 0, y: 0 }
+        position: { x: 0, y: 0 },
+        deletable: false
     };
-    switch (node.type){
+    switch (node.type) {
         case 'Literal':
             newNode.data.label += ` (${node.value})`;
             break;
@@ -59,19 +58,19 @@ function getNewSvelteFlowNode(nodeId: string, node: Node): SvelteFlowNode {
         case 'BinaryExpression':
             newNode.data.label += ` (${node.operator})`;
             break;
-        
+
 
     }
     return newNode;
 }
 
-function getEdgeBasedOnNodeAndParent(edgeNum: number, parentNodeLabel: string, nodeId: string, node: Node, parentNode: Node) {
+function getEdgeBasedOnNodeAndParent(edgeNum: number, parentNodeLabel: string, nodeId: string, _node: Node, _parentNode: Node): Edge {
     const data: Edge = {
         id: (edgeNum).toString() + parentNodeLabel,
         target: nodeId,
-        source: parentNodeLabel
+        source: parentNodeLabel,
+        deletable: false
     };
-
     return data
 }
 
