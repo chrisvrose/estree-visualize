@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { getASTStringFromSource } from '$lib/parse';
-	import CodeMirror from 'svelte-codemirror-editor';
-	import {javascript} from '@codemirror/lang-javascript'
+	
 	import OutputTab from '../components/OutputTab.svelte';
+	import SelectableTextEditor from '../components/SelectableTextEditor.svelte';
 
 	let sourceString = $state('');
 
@@ -16,7 +16,7 @@
 
 <div class="grid grid-cols-1 md:grid-cols-2 min-h-screen">
 	<div style="grid-column: 1 " class="p-1" >
-		<CodeMirror class="border-1" bind:value={sourceString} lang={javascript()} placeholder="Javascript code" basic={true} ></CodeMirror>
+		<SelectableTextEditor bind:sourceText={sourceString} />
 	</div>
 	<div class="grid grid-cols-1 p-1" style="grid-column: 2" >
 		<OutputTab error={error} sourceAST={derivedAST} sourceASTString={derivedASTString} />
