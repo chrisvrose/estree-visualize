@@ -2,6 +2,7 @@
 
 View a ECMAScript module AST.
 
+Hovering over a AST Node in graphical mode selects the corresponding /source in the editor.
 
 ### Progress 
 
