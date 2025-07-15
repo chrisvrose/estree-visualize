@@ -6,6 +6,8 @@
 	import { isAnyError } from "$lib/parse";
 	import AstDisplay from "./ASTDisplay.svelte";
 	import { SvelteFlowProvider } from "@xyflow/svelte";
+	import { oneDark } from "@codemirror/theme-one-dark";
+    import {json} from '@codemirror/lang-json'
     
     type CurrentTab = 'error'|'ast'|'astString' | string;
     
@@ -30,7 +32,7 @@
     {/snippet}
     {#snippet content()}
         <Tabs.Panel value="astString">
-            <CodeMirror value={sourceASTString} basic={true} readonly></CodeMirror>
+            <CodeMirror value={sourceASTString} basic={true} readonly  theme={oneDark} lang={json()}></CodeMirror>
         </Tabs.Panel>
         <Tabs.Panel value="ast">
         <SvelteFlowProvider>
