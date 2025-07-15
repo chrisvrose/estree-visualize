@@ -7,10 +7,9 @@ View a ECMAScript module AST.
 
 - [X] View AST text
 - [X] View Errors
-- [ ] Highlight AST from code
 - [X] Graph viewing
-- [ ] Highlight Graph from code
-
+- [X] Highlight code from AST (Graphical) 
+- [ ] Highlight code from AST (Text) (Needed?)
 
 ## Developing
 
