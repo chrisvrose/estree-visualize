@@ -15,10 +15,10 @@
 <div class="p-2"></div>
 
 <div class="grid grid-cols-1 md:grid-cols-2 min-h-screen">
-	<div style="grid-column: 1 " class="p-1" >
+	<div class="p-1 col-span-1 " >
 		<SelectableTextEditor bind:sourceText={sourceString} />
 	</div>
-	<div class="grid grid-cols-1 p-1" style="grid-column: 2" >
+	<div class="grid p-1 col-span-1">
 		<OutputTab error={error} sourceAST={derivedAST} sourceASTString={derivedASTString} />
 	</div>
 </div>
