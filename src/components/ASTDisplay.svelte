@@ -65,12 +65,6 @@
 			edges
 		];
 	}
-	function onLayout() {
-		const [newNodes, newEdges] = getLayoutedElements(nodes, edges);
-		nodes = [...newNodes];
-		edges = [...newEdges];
-		fitView();
-	}
 </script>
 
 <div style:height="80vh" id="something" class="card preset-outlined-surface-500 p-4">
@@ -88,11 +82,7 @@
 			$userSelectionStore = undefined;
 		}}
 	>
-		<Panel position="top-right">
-			<nav class="btn-group preset-outlined-surface-200-800 flex-col p-2 md:flex-row">
-				<button onclick={onLayout} type="button" class="btn">Refit</button>
-			</nav>
-		</Panel>
+		
 		<MiniMap nodeStrokeWidth={3} />
 		<Controls />
 		<Background bgColor="light-dark(var(--body-background-color),var(--body-background-color-dark))"></Background>

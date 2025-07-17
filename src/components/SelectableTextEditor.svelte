@@ -36,7 +36,6 @@
 	bind:value={sourceText}
 	lang={javascript()}
 	placeholder="Javascript code"
-	basic={true}
 	on:ready={(e) => {
 		onEditorViewReady(e.detail);
 	}}

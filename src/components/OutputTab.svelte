@@ -25,7 +25,7 @@
 <Tabs value={selectedTab} onValueChange={e=>selectedTab = e.value}>
     {#snippet list()}
         <Tabs.Control value="ast">Graphical AST</Tabs.Control>
-        <Tabs.Control value="astString">Textual AST</Tabs.Control>
+        <Tabs.Control value="astString">JSON AST</Tabs.Control>
         <Tabs.Control value="error">Errors {#if isAnyError(error)}
                 <span class="badge-icon preset-filled-error-500 absolute -right-0 -top-0 z-10">!</span>
         {/if}</Tabs.Control>
