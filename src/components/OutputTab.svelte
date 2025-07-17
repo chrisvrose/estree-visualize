@@ -36,16 +36,15 @@
 			{#snippet lead()}<IconJSON size={20} />{/snippet}
 			JSON</Tabs.Control
 		>
-		<Tabs.Control value="error"
-			>
+		<Tabs.Control value="error">
 			{#snippet lead()}
-                {#if isAnyError(error)}
-                <IconErrorsAlert size={20} class="text-error-500"/>
-                {:else}
-                <IconNoErrorsAlert size={20} />
-                {/if}
-            {/snippet}
-                Errors {#if isAnyError(error)}
+				{#if isAnyError(error)}
+					<IconErrorsAlert size={20} class="text-error-500" />
+				{:else}
+					<IconNoErrorsAlert size={20} />
+				{/if}
+			{/snippet}
+			Errors {#if isAnyError(error)}
 				<span class="badge-icon preset-filled-error-500 absolute -top-0 -right-0 z-10">!</span>
 			{/if}</Tabs.Control
 		>
