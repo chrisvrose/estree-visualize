@@ -8,7 +8,10 @@
 		useSvelteFlow,
 		type Edge,
 		type Node,
-		MiniMap
+		MiniMap,
+
+		Controls
+
 	} from '@xyflow/svelte';
 	import Dagre from '@dagrejs/dagre';
 	import '@xyflow/svelte/dist/style.css';
@@ -91,7 +94,7 @@
 			</nav>
 		</Panel>
 		<MiniMap nodeStrokeWidth={3} />
-		<!-- <Background/> -->
+		<Controls />
 		<Background bgColor="light-dark(var(--body-background-color),var(--body-background-color-dark))"></Background>
 	</SvelteFlow>
 </div>

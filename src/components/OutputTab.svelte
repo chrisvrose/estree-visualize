@@ -27,7 +27,7 @@
         <Tabs.Control value="ast">Graphical AST</Tabs.Control>
         <Tabs.Control value="astString">Textual AST</Tabs.Control>
         <Tabs.Control value="error">Errors {#if isAnyError(error)}
-              <span class="badge-icon preset-filled-primary-500 absolute -right-0 -top-0 z-10">!</span>
+                <span class="badge-icon preset-filled-primary-500 absolute -right-0 -top-0 z-10">!</span>
         {/if}</Tabs.Control>
     {/snippet}
     {#snippet content()}
