@@ -1,6 +1,6 @@
 # estree-visualize
 
-View a ECMAScript module AST.
+View a ECMAScript module AST, and generate code from it.
 
 Hovering over a AST Node in graphical mode selects the corresponding /source in the editor.
 
@@ -10,7 +10,8 @@ Hovering over a AST Node in graphical mode selects the corresponding /source in 
 - [X] View Errors
 - [X] Graph viewing
 - [X] Highlight code from AST (Graphical) 
-- [ ] Highlight code from AST (Text) (Needed?)
+- [ ] ~~Highlight code from AST (Text)~~ Not needed
+- [X] Generate JS Code from ESTree spec trees
 
 ## Developing
 
