@@ -32,7 +32,7 @@
 </script>
 
 <CodeMirror
-	class="border-1"
+	class="border-surface-500 border-1"
 	bind:value={sourceText}
 	lang={javascript()}
 	placeholder="Javascript code"

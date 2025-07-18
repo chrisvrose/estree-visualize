@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Program } from 'estree';
-	import ErrorBox from './ErrorBox.svelte';
+	import ErrorBox from '../ErrorBox.svelte';
 	import { Tabs } from '@skeletonlabs/skeleton-svelte';
 	import CodeMirror from 'svelte-codemirror-editor';
 	import { isAnyError } from '$lib/parse';

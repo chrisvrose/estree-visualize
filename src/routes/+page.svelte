@@ -1,26 +1,20 @@
 <script lang="ts">
 	import { getASTStringFromSource } from '$lib/parse';
-	
-	import OutputTab from '../components/OutputTab.svelte';
-	import SelectableTextEditor from '../components/SelectableTextEditor.svelte';
+
+	import OutputTab from '../components/parse/ParseOutputTabs.svelte';
+	import SelectableTextEditor from '../components/parse/SelectableTextEditor.svelte';
+	import MainBoxes from '../components/AppBox.svelte';
 
 	let sourceString = $state('');
 
 	const [derivedASTString, derivedAST, error] = $derived(getASTStringFromSource(sourceString));
 </script>
 
-
-
-<h2 class="h2">estree-visualizer</h2>
-<div class="p-2"></div>
-
-<div class="grid grid-cols-1 md:grid-cols-2 min-h-screen">
-	<div class="p-1 col-span-1 " >
+<MainBoxes>
+	{#snippet left()}
 		<SelectableTextEditor bind:sourceText={sourceString} />
-	</div>
-	<div class="grid p-1 col-span-1">
-		<OutputTab error={error} sourceAST={derivedAST} sourceASTString={derivedASTString} />
-	</div>
-</div>
-
-
+	{/snippet}
+	{#snippet right()}
+		<OutputTab {error} sourceAST={derivedAST} sourceASTString={derivedASTString} />
+	{/snippet}
+</MainBoxes>

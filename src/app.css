@@ -7,9 +7,6 @@
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
 
-body{
-    padding: 0.25rem;
-}
 [data-theme="catppuccin"]{
     --base-font-size: 18px;
 }
