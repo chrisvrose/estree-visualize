@@ -18,10 +18,10 @@
 	{#snippet left()}
 		<CodeMirror placeholder="ESTree JSON Object" bind:value={source} theme={oneDark} class="border-surface-500 border-1"
         lang={json()} basic
-		></CodeMirror>
+		/>
 	{/snippet}
 
 	{#snippet right()}
-        <CodeGenOutputTabs error={errors} genCode={codeGen}></CodeGenOutputTabs>
+        <CodeGenOutputTabs error={errors} genCode={codeGen} />
 	{/snippet}
 </MainBoxes>
