@@ -11,6 +11,9 @@
 	let [codeGen, errors] = $derived(generateCode(source));
 </script>
 
+<svelte:head>
+	<title>estree-viz | CodeGen</title>
+</svelte:head>
 <MainBoxes>
 	{#snippet left()}
 		<CodeMirror placeholder="ESTree JSON Object" bind:value={source} theme={oneDark} class="border-surface-500 border-1"

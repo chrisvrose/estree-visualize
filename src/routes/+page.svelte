@@ -10,6 +10,9 @@
 	const [derivedASTString, derivedAST, error] = $derived(getASTStringFromSource(sourceString));
 </script>
 
+<svelte:head>
+	<title>estree-viz | Parse</title>
+</svelte:head>
 <MainBoxes>
 	{#snippet left()}
 		<SelectableTextEditor bind:sourceText={sourceString} />
