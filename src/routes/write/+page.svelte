@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { generateCode } from '$lib/codegen';
-	import { AppBar } from '@skeletonlabs/skeleton-svelte';
 	import CodeMirror from 'svelte-codemirror-editor';
 	import MainBoxes from '../../components/AppBox.svelte';
 	import { oneDark } from '@codemirror/theme-one-dark';
@@ -15,7 +14,7 @@
 <MainBoxes>
 	{#snippet left()}
 		<CodeMirror placeholder="ESTree JSON Object" bind:value={source} theme={oneDark} class="border-surface-500 border-1"
-        lang={json()}
+        lang={json()} basic
 		></CodeMirror>
 	{/snippet}
 
